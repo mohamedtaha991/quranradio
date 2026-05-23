@@ -328,7 +328,7 @@ input[type=range]::-webkit-slider-thumb {
 /* ── Footer ── */
 footer {
   text-align: center; padding: 28px 0 0;
-  border-top: 1px solid var(--border);
+
   color: var(--muted); font-size: 13px;
 }
 footer span { color: var(--accent); }
