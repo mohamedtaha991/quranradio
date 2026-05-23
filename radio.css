@@ -180,7 +180,7 @@ header {
 .volume-wrap { display: flex; align-items: center; gap: 10px; flex: 1; max-width: 260px; }
 .volume-icon { font-size: 18px; color: var(--muted); }
 input[type=range] {
-  -webkit-appearance: none; flex: 1; height: 4px;
+  -webkit-appearance: none; appearance: none; flex: 1; height: 4px;
   background: rgba(255,255,255,0.1); border-radius: 2px;
   outline: none; cursor: pointer;
 }
