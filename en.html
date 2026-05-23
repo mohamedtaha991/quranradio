@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quran Radio — Live Streaming</title>
+  <link rel="icon" type="image/svg+xml" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="radio.css" />
+  <style>
+    html { font-family: "Inter", sans-serif; }
+    .search-wrap input { font-family: "Inter", sans-serif; }
+    .filter-btn        { font-family: "Inter", sans-serif; }
+    .eq-bars   { margin-left: 20px; }
+    .status-text { margin-left: auto; }
+  </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="connecting-overlay" id="overlay">
+  <div class="spinner-box">
+    <div class="spinner"></div>
+    <div class="spinner-text">Connecting to station...</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="container">
+  <header>
+    <div class="logo">
+      <div class="logo-icon"><img src="logo.png" alt="logo" /></div>
+      <div class="logo-text">Quran <span>Radio</span></div>
+    </div>
+    <div class="header-right">
+      <a class="lang-btn" href="index.html">عربي</a>
+      <div class="header-badge">🎙 Live Stream</div>
+    </div>
+  </header>
+
+  <div class="now-playing">
+    <div class="now-playing-inner">
+      <div class="station-avatar" id="avatar"><img src="logo.png" alt="logo" /></div>
+      <div class="station-info">
+        <div class="now-label idle" id="liveLabel">
+          <span class="live-dot"></span>
+          <span id="liveLabelText">Select a station to listen</span>
+        </div>
+        <div class="station-name" id="nowName">--</div>
+        <div class="station-country" id="nowCountry">--</div>
+      </div>
+      <div class="eq-bars" id="eqBars">
+        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+        <div class="eq-bar"></div><div class="eq-bar"></div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn-play" id="btnPlay" disabled>▶</button>
+      <div class="volume-wrap">
+        <span class="volume-icon" id="volIcon">🔊</span>
+        <input type="range" id="volume" min="0" max="1" step="0.02" value="0.8" />
+      </div>
+      <span class="status-text" id="statusText">No stream</span>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Search stations..." />
+    </div>
+    <div class="filter-btns" id="filterBtns"></div>
+  </div>
+
+  <div class="stations-grid" id="grid"></div>
+  <div class="no-results" id="noResults">No results found 🔍</div>
+
+  <footer>
+    <p>All rights reserved &copy; 2025 &nbsp;|&nbsp; Developed by <span>Mohamed Maher</span></p>
+  </footer>
+</div>
+
+<audio id="audioPlayer" preload="none"></audio>
+
+<script>
+window.RADIO_CONFIG = {
+  nameField:       "En_name",
+  countryField:    "En_country",
+  allLabel:        "🌍 All",
+  loadingMsg:      "⏳ Loading stations...",
+  errorMsg:        "⚠️ Failed to load stations. Please check your internet connection.",
+  connectingMsg:   "Connecting...",
+  nowPlayingMsg:   "Now Playing",
+  stoppedLabelMsg: "Stopped",
+  liveMsg:         "🔴 Live",
+  stoppedMsg:      "⏹ Stopped",
+  bufferingMsg:    "⏳ Buffering...",
+  streamErrorMsg:  "⚠️ Stream error",
+  connectErrorMsg: "⚠️ Could not connect to station, please try again",
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
+<script src="radio.js"></script>
+</body>
+</html>

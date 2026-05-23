@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>راديو القرآن الكريم</title>
+  <link rel="icon" type="image/svg+xml" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="radio.css" />
+  <style>
+    html { font-family: "Tajawal", sans-serif; }
+    .search-wrap input { font-family: "Tajawal", sans-serif; }
+    .filter-btn        { font-family: "Tajawal", sans-serif; }
+    .eq-bars   { margin-right: 20px; }
+    .status-text { margin-right: auto; }
+  </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="connecting-overlay" id="overlay">
+  <div class="spinner-box">
+    <div class="spinner"></div>
+    <div class="spinner-text">جاري الاتصال بالمحطة...</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="container">
+  <header>
+    <div class="logo">
+      <div class="logo-icon"><img src="logo.png" alt="logo" /></div>
+      <div class="logo-text">راديو <span>القرآن الكريم</span></div>
+    </div>
+    <div class="header-right">
+      <a class="lang-btn" href="en.html">English</a>
+      <div class="header-badge">بث مباشر</div>
+    </div>
+  </header>
+
+  <div class="now-playing">
+    <div class="now-playing-inner">
+      <div class="station-avatar" id="avatar"><img src="logo.png" alt="logo" /></div>
+      <div class="station-info">
+        <div class="now-label idle" id="liveLabel">
+          <span class="live-dot"></span>
+          <span id="liveLabelText">اختر محطة للاستماع</span>
+        </div>
+        <div class="station-name" id="nowName">--</div>
+        <div class="station-country" id="nowCountry">--</div>
+      </div>
+      <div class="eq-bars" id="eqBars">
+        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+        <div class="eq-bar"></div><div class="eq-bar"></div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn-play" id="btnPlay" disabled>▶</button>
+      <div class="volume-wrap">
+        <span class="volume-icon" id="volIcon">🔊</span>
+        <input type="range" id="volume" min="0" max="1" step="0.02" value="0.8" />
+      </div>
+      <span class="status-text" id="statusText">لا يوجد بث</span>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="ابحث عن محطة..." />
+    </div>
+    <div class="filter-btns" id="filterBtns"></div>
+  </div>
+
+  <div class="stations-grid" id="grid"></div>
+  <div class="no-results" id="noResults">لا توجد نتائج 🔍</div>
+
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2025 &nbsp;|&nbsp; تطوير <span>Mohamed Maher</span></p>
+  </footer>
+</div>
+
+<audio id="audioPlayer" preload="none"></audio>
+
+<script>
+window.RADIO_CONFIG = {
+  nameField:       "name",
+  countryField:    "country",
+  allLabel:        "🌍 الكل",
+  loadingMsg:      "⏳ جاري تحميل المحطات...",
+  errorMsg:        "⚠️ تعذّر تحميل قائمة المحطات، تحقق من الاتصال بالإنترنت",
+  connectingMsg:   "جاري الاتصال...",
+  nowPlayingMsg:   "يعمل الآن",
+  stoppedLabelMsg: "متوقف",
+  liveMsg:         "🔴 بث مباشر",
+  stoppedMsg:      "⏹ متوقف",
+  bufferingMsg:    "⏳ جاري التحميل...",
+  streamErrorMsg:  "⚠️ حدث خطأ في البث",
+  connectErrorMsg: "⚠️ تعذّر الاتصال بالمحطة، حاول مرة أخرى",
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
+<script src="radio.js"></script>
+</body>
+</html>

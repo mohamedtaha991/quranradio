@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0">
+  <PropertyGroup>
+	<StartupCommand>npx serve . -l 5500</StartupCommand>
+	<JavaScriptTestFramework>None</JavaScriptTestFramework>
+  </PropertyGroup>
+</Project>
