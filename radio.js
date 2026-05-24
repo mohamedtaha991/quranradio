@@ -96,6 +96,10 @@ const searchInput   = document.getElementById('search');
 function buildFilters() {
   const countries = ['all', ...new Set(stations.map(s => s.country))];
   const wrap = document.getElementById('filterBtns');
+  if (!wrap) {
+    activeFilter = 'all';
+    return;
+  }
   wrap.innerHTML = '';
   countries.forEach(c => {
     const btn = document.createElement('button');
