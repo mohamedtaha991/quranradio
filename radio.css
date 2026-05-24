@@ -156,7 +156,7 @@ header {
 .station-country:empty { display: none; }
 
 .video-container {
-  width: clamp(180px, 28vw, 320px);
+  width: clamp(140px, 18vw, 180px);
   aspect-ratio: 16 / 9;
   border-radius: 14px;
   overflow: hidden;
@@ -450,10 +450,7 @@ footer span { color: var(--accent); }
   }
 
   .video-container {
-    width: 100%;
-    max-width: none;
-    order: 3;
-    margin-top: 6px;
+    display: none;
   }
 
   .station-name {
