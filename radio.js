@@ -16,9 +16,57 @@ const COUNTRY_ICONS = {
   'Libya': '🇱🇾', 'Special Stations': '🎙',
 };
 
+const COUNTRY_CODES = {
+  // Arabic
+  'مصر': 'EG',
+  'المملكة العربية السعودية': 'SA',
+  'الإمارات العربية المتحدة': 'AE',
+  'المغرب': 'MA',
+  'الجزائر': 'DZ',
+  'فلسطين': 'PS',
+  'الأردن': 'JO',
+  'الكويت': 'KW',
+  'قطر': 'QA',
+  'البحرين': 'BH',
+  'عُمان': 'OM',
+  'تونس': 'TN',
+  'ليبيا': 'LY',
+  'إذاعات خاصة': 'FM',
+  // English
+  'Egypt': 'EG',
+  'Saudi Arabia': 'SA',
+  'UAE': 'AE',
+  'Morocco': 'MA',
+  'Algeria': 'DZ',
+  'Palestine': 'PS',
+  'Jordan': 'JO',
+  'Kuwait': 'KW',
+  'Qatar': 'QA',
+  'Bahrain': 'BH',
+  'Oman': 'OM',
+  'Tunisia': 'TN',
+  'Libya': 'LY',
+  'Special Stations': 'FM',
+};
+
 function getIcon(s) {
   const c = s[RADIO_CONFIG.countryField] || s.country || s.En_country || '';
   return COUNTRY_ICONS[c] || '📡';
+}
+
+function getCountryCode(country) {
+  if (COUNTRY_CODES[country]) return COUNTRY_CODES[country];
+  const cleaned = String(country || '').replace(/[^A-Za-z\u0600-\u06FF ]/g, '').trim();
+  if (!cleaned) return 'FM';
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  if (words.length >= 2) {
+    return (words[0][0] + words[1][0]).toUpperCase();
+  }
+  return cleaned.slice(0, 2).toUpperCase();
+}
+
+function getPlayIconMarkup(isPause) {
+  return `<span class="media-icon ${isPause ? 'pause' : 'play'}" aria-hidden="true"></span>`;
 }
 
 let stations    = [];
@@ -73,13 +121,14 @@ function renderGrid() {
     count++;
     const card = document.createElement('div');
     card.className = 'station-card' + (current && current.id === s.id ? ' active' : '');
+    const isCurrentPlaying = current && current.id === s.id && isPlaying;
     card.innerHTML = `
-      <div class="card-icon">${s.icon}</div>
+      <div class="card-icon">${getCountryCode(s.country)}</div>
       <div class="card-body">
         <div class="card-name">${s.name}</div>
         <div class="card-country"><span class="country-badge">${s.country}</span></div>
       </div>
-      <div class="card-action">${current && current.id === s.id && isPlaying ? '⏸' : '▶'}</div>
+      <div class="card-action">${getPlayIconMarkup(isCurrentPlaying)}</div>
     `;
     card.onclick = () => selectStation(s);
     grid.appendChild(card);
@@ -136,7 +185,7 @@ function togglePlay() {
 
 function setPlaying(val) {
   isPlaying = val;
-  btnPlay.textContent  = val ? '⏸' : '▶';
+  btnPlay.innerHTML    = getPlayIconMarkup(val);
   statusEl.textContent = val ? cfg.liveMsg : cfg.stoppedMsg;
   avatar.classList.toggle('playing', val);
   eqBars.classList.toggle('active', val);
@@ -193,6 +242,7 @@ async function init() {
     return;
   }
   buildFilters();
+  btnPlay.innerHTML = getPlayIconMarkup(false);
   renderGrid();
 }
 
