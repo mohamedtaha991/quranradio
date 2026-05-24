@@ -197,13 +197,16 @@ input[type=range]::-webkit-slider-thumb {
 .search-wrap input {
   width: 100%;
   background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-  padding: 11px 16px 11px 44px;
+  padding: 11px 16px;
   color: var(--text); font-size: 14px;
   outline: none; transition: border 0.2s;
 }
 .search-wrap input:focus { border-color: rgba(56,189,248,0.4); }
 .search-icon {
-  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  position: absolute;
+  inset-inline-start: 14px;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--muted); font-size: 16px; pointer-events: none;
 }
 .filter-btns { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -325,6 +328,14 @@ input[type=range]::-webkit-slider-thumb {
 }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
+/* Keep search field direction-aware for Arabic/English pages */
+html[dir="rtl"] .search-wrap input {
+  padding: 11px 44px 11px 16px;
+}
+html[dir="ltr"] .search-wrap input {
+  padding: 11px 16px 11px 44px;
+}
+
 /* ── Footer ── */
 footer {
   text-align: center; padding: 28px 0 0;
@@ -335,9 +346,87 @@ footer span { color: var(--accent); }
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
+  .container { padding: 0 14px 44px; }
+
+  header {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .header-right { width: 100%; justify-content: space-between; }
+
   .now-playing-inner { flex-wrap: wrap; }
+
+  .station-avatar {
+    width: 72px;
+    height: 72px;
+  }
+
+  .station-name {
+    font-size: 17px;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .btn-play {
+    width: 52px;
+    height: 52px;
+  }
+
+  .volume-wrap {
+    min-width: 180px;
+    max-width: none;
+    flex: 1 1 220px;
+  }
+
+  .status-text {
+    width: 100%;
+  }
+
+  .toolbar { gap: 10px; }
+
+  .search-wrap {
+    min-width: 100%;
+  }
+
+  .filter-btns {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+  }
+
+  .filter-btn {
+    flex: 0 0 auto;
+  }
+
   .eq-bars { display: none; }
   .stations-grid { grid-template-columns: 1fr; }
   .logo-text { font-size: 17px; }
   .now-playing { padding: 24px 20px; }
+
+  .station-card {
+    padding: 14px;
+  }
+
+  .card-name {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .spinner-box {
+    margin: 0 12px;
+    padding: 28px 20px;
+  }
 }
