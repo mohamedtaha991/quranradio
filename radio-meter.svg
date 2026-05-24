@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">Radio Meter</title>
+  <desc id="desc">Stylized radio tuning dial with glowing needle.</desc>
+
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#1f335a"/>
+      <stop offset="100%" stop-color="#0b1326"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7dd3fc"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="needle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fcd34d"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="110" cy="110" r="102" fill="url(#bg)"/>
+  <circle cx="110" cy="110" r="98" fill="none" stroke="#172449" stroke-width="2"/>
+
+  <circle cx="110" cy="110" r="78" fill="none" stroke="url(#ring)" stroke-width="7" opacity="0.8"/>
+  <circle cx="110" cy="110" r="66" fill="#0f1a34"/>
+
+  <g stroke="#93c5fd" stroke-width="2" opacity="0.7">
+    <line x1="110" y1="36" x2="110" y2="48"/>
+    <line x1="74" y1="47" x2="79" y2="57"/>
+    <line x1="48" y1="74" x2="57" y2="79"/>
+    <line x1="36" y1="110" x2="48" y2="110"/>
+    <line x1="48" y1="146" x2="57" y2="141"/>
+    <line x1="74" y1="173" x2="79" y2="163"/>
+    <line x1="110" y1="184" x2="110" y2="172"/>
+    <line x1="146" y1="173" x2="141" y2="163"/>
+    <line x1="173" y1="146" x2="163" y2="141"/>
+    <line x1="184" y1="110" x2="172" y2="110"/>
+    <line x1="173" y1="74" x2="163" y2="79"/>
+    <line x1="146" y1="47" x2="141" y2="57"/>
+  </g>
+
+  <g transform="rotate(-28 110 110)" filter="url(#glow)">
+    <rect x="108" y="56" width="4" height="58" rx="2" fill="url(#needle)"/>
+    <circle cx="110" cy="58" r="5" fill="#fde68a"/>
+  </g>
+
+  <circle cx="110" cy="110" r="14" fill="#1e293b" stroke="#60a5fa" stroke-width="3"/>
+  <circle cx="110" cy="110" r="5" fill="#bae6fd"/>
+
+  <path d="M72 148 C86 163, 134 163, 148 148" fill="none" stroke="#334155" stroke-width="5" stroke-linecap="round"/>
+  <path d="M78 147 C90 159, 130 159, 142 147" fill="none" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+</svg>

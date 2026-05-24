@@ -113,6 +113,13 @@ header {
   transition: all 0.3s;
 }
 .station-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
+.avatar-meter {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+}
 .station-avatar.playing {
   box-shadow: 0 0 30px rgba(56,189,248,0.35);
   animation: pulse-border 2s ease-in-out infinite;
@@ -145,6 +152,8 @@ header {
   margin-bottom: 4px;
 }
 .station-country { font-size: 14px; color: var(--muted); }
+.station-name:empty,
+.station-country:empty { display: none; }
 
 /* ── Equalizer ── */
 .eq-bars {
@@ -390,15 +399,31 @@ footer span { color: var(--accent); }
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
-  .container { padding: 0 14px 44px; }
+  .container { padding: 0 14px 22px; }
 
   header {
-    flex-wrap: wrap;
-    gap: 12px;
+    flex-wrap: nowrap;
+    gap: 8px;
     margin-bottom: 20px;
   }
 
-  .header-right { width: 100%; justify-content: space-between; }
+  .header-right {
+    width: auto;
+    justify-content: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .lang-btn,
+  .header-badge {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .logo {
+    min-width: 0;
+    flex: 1;
+  }
 
   .now-playing-inner { flex-wrap: wrap; }
 
@@ -458,7 +483,12 @@ footer span { color: var(--accent); }
   }
 
   .eq-bars { display: none; }
-  .stations-grid { grid-template-columns: 1fr; }
+  .stations-grid {
+    grid-template-columns: 1fr;
+    max-height: 52dvh;
+    overflow-y: auto;
+    padding-inline-end: 4px;
+  }
   .logo-text { font-size: 17px; }
   .now-playing { padding: 24px 20px; }
 
@@ -476,5 +506,31 @@ footer span { color: var(--accent); }
   .spinner-box {
     margin: 0 12px;
     padding: 28px 20px;
+  }
+
+  footer {
+    padding-top: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-badge {
+    padding: 6px 8px;
+    font-size: 0;
+    line-height: 1;
+  }
+
+  html[lang="ar"] .header-badge::before {
+    content: 'مباشر';
+    font-size: 11px;
+  }
+
+  html[lang="en"] .header-badge::before {
+    content: 'Live';
+    font-size: 11px;
+  }
+
+  .lang-btn {
+    padding: 6px 8px;
   }
 }
