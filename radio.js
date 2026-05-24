@@ -91,6 +91,7 @@ const overlay       = document.getElementById('overlay');
 const toastEl       = document.getElementById('toast');
 const grid          = document.getElementById('grid');
 const noResults     = document.getElementById('noResults');
+const searchInput   = document.getElementById('search');
 
 function buildFilters() {
   const countries = ['all', ...new Set(stations.map(s => s.country))];
@@ -111,7 +112,7 @@ function buildFilters() {
 }
 
 function renderGrid() {
-  const q = document.getElementById('search').value.trim().toLowerCase();
+  const q = (searchInput?.value || '').trim().toLowerCase();
   grid.innerHTML = '';
   let count = 0;
   stations.forEach(s => {
@@ -220,7 +221,7 @@ btnPlay.addEventListener('click', togglePlay);
 audio.addEventListener('error',   () => { showOverlay(false); setPlaying(false); showToast(cfg.streamErrorMsg); });
 audio.addEventListener('waiting', () => { statusEl.textContent = cfg.bufferingMsg; });
 audio.addEventListener('playing', () => { statusEl.textContent = cfg.liveMsg; });
-document.getElementById('search').addEventListener('input', renderGrid);
+if (searchInput) searchInput.addEventListener('input', renderGrid);
 
 // ── Init ──
 async function init() {
